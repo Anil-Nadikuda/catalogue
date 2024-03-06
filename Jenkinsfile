@@ -6,6 +6,7 @@ pipeline {
     }
     environment {
         packageVersion = ''
+        nexusURL = '172.31.10.125'
     }
     stages {
         stage('Get the version') {
@@ -31,8 +32,25 @@ pipeline {
                 zip -q -r catalogue.zip ./* -x ".git" -x "*.zip"
                 ls -ltr
                  """
-                 
-
+            }
+        }
+        stage('publish Artifacts') {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: "${nexusURL}",
+                    groupId: 'com.roboshop',
+                    version: ${packageVersion},
+                    repository: 'catalogue',
+                    credentialsId: 'nexus-auth',
+                    artifacts: [
+                        [artifactId: 'catalogue',
+                        classifier: '',
+                        file: 'catalogue.zip' + version + '.jar',
+                        type: 'zip']
+                    ]
+     )
             }
         }
         stage('Deploy') {

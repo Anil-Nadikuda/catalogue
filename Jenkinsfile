@@ -42,7 +42,7 @@ pipeline {
         stage('Unit tests') {
             steps {
                  sh """
-                 echo "unit tests will run here
+                 echo "unit tests will run here"
                  """
             }
         }

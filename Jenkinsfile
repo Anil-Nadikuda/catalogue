@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         packageVersion = ''
-        nexusURL = '172.31.14.12:8081'
+        nexusURL = '172.31.25.183:8081'
     }
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -46,13 +46,13 @@ pipeline {
                  """
             }
         }
-        stage('Sonar scan') {
-            steps {
-                 sh """
-                    sonar-scanner
-                 """
-            }
-        }
+        // stage('Sonar scan') {
+        //     steps {
+        //          sh """
+        //             sonar-scanner
+        //          """
+        //     }
+        // }
         stage('Build') {
             steps {
                 sh """

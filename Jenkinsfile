@@ -7,7 +7,7 @@
     application: "nodejsVM",
     component: "catalogue"
  ]
- if( 1 env.BRANCH_NAME.equalsIgnoreCase('main')){
+ if( ! env.BRANCH_NAME.equalsIgnoreCase('main')){
     pipelineDecision.decidePipeline(configMap)
  }
  else{

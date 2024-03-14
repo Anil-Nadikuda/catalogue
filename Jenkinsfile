@@ -6,13 +6,13 @@ pipeline {
     }
     environment {
         packageVersion = ''
-        // nexusURL = '172.31.25.183:8081'
+        nexusURL = '172.31.83.22:8081'
     }
-    // options {
-    //     timeout(time: 1, unit: 'HOURS')
-    //     disableConcurrentBuilds()
-    //     ansiColor('xterm')
-    // }
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
+        ansiColor('xterm')
+    }
     parameters {
     
 
@@ -46,13 +46,13 @@ pipeline {
                  """
             }
         }
-        // stage('Sonar scan') {
-        //     steps {
-        //          sh """
-        //             sonar-scanner
-        //          """
-        //     }
-        // }
+        stage('Sonar scan') {
+            steps {
+                 sh """
+                    echo "sonar-scanner" 
+                 """ // just sonar-scaner if sonar server created
+            }
+        }
         stage('Build') {
             steps {
                 sh """
